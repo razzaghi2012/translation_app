@@ -61,6 +61,7 @@ end
   		user_with_same_email = @user.dup
   		user_with_same_email.save
   	end
+  end
 
   	describe "when email address is already taken" do
     before do
@@ -68,7 +69,9 @@ end
       user_with_same_email.email = @user.email.upcase
       user_with_same_email.save
     end
-  	it { should_not be_valid }
+  end
+  	
+    it { should_not be_valid }
 
     describe "when password is not present" do
     before { @user.password = @user.password_confirmation = " " }
@@ -88,10 +91,10 @@ end
   describe "return value of authenticate method" do
   before { @user.save }
   let(:found_user) { User.find_by_email(@user.email) }
+  end
 
   describe "with valid password" do
     it { should == found_user.authenticate(@user.password) }
-  end
 
   describe "with invalid password" do
     let(:user_for_invalid_password) { found_user.authenticate("invalid") }
@@ -125,3 +128,5 @@ describe "with a password that's too short" do
     end
   end
 end
+
+
