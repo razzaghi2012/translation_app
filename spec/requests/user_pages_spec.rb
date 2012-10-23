@@ -24,6 +24,13 @@ describe "User pages" do
         fill_in "Confirmation", with: "foobar"
       end
 
+      describe "after submission" do
+        before { click_button submit }
+
+        it { should have_selector('title', text: 'Sign up') }
+        it { should have_content('error') }
+      end
+
       it "should create a user" do
         expect { click_button submit }.to change(User, :count).by(1)
       end
